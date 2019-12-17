@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<project name="agileJava" default="junitgui" basedir=".">
+<property name="junitJar" value="U:\junit-3.8.1.jar" />
+<property name="src.dir" value="${basedir}" /> 
+<property name="build.dir" value="${basedir}\classes" />
+
+<path id="classpath">
+<pathelement location="${junitJar}" />
+<pathelement location="${build.dir}" />
+</path>
+
+<target name="init">
+<mkdir dir="${build.dir}" />
+</target>
+
+<target name="build" depends="init" description="build all">
+<javac srcdir="${src.dir}" destdir="${build.dir}" 
+source="1.5" deprecation="on" debug="on" optimize="off" includes="**">
+<classpath refid="classpath" />
+</javac>
+</target>
+
+<target name="junitgui" depends="build" description="run junit gui">
+<java classname="junit.awtui.TestRunner" fork="yes">
+<arg value="${basedir}" />
+<classpath refid="classpath" />
+</java>
+</target>
+
+<target name="clean">
+<delete dir="${build.dir}" />
+</target>
+
+<target name="rebuildAll" depends="clean,build" description="rebuild all" />
+</project>
