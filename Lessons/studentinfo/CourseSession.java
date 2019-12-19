@@ -53,21 +53,6 @@ class CourseSession {
 		return startDate;
 	}
 	
-	String getRosterReport(){
-		StringBuilder buffer = new StringBuilder();
-		
-		buffer.append(ROSTER_REPORT_HEADER);
-		
-		for (Student student : students){
-			buffer.append(student.getName());
-			buffer.append(NEWLINE);			
-		}
-		
-		buffer.append(ROSTER_REPORT_FOOTER + students.size() + NEWLINE);
-
-		return buffer.toString();
-	}
-	
 	ArrayList<Student> getAllStudents() {
 		return students;
 	}

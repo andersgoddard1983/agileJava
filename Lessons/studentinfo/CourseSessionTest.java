@@ -32,19 +32,6 @@ public class CourseSessionTest extends TestCase {
 		assertEquals(student2, session.get(1));
 	}
 	
-	public void testRosterReport(){
-		session.enroll(new Student("A"));
-		session.enroll(new Student("B"));
-		
-		String rosterReport = session.getRosterReport();
-		assertEquals(
-			CourseSession.ROSTER_REPORT_HEADER + 
-			"A" + CourseSession.NEWLINE + 
-			"B" + CourseSession.NEWLINE + 
-			CourseSession.ROSTER_REPORT_FOOTER + "2" + 
-			CourseSession.NEWLINE, rosterReport);
-	}
-	
 	public void testCourseDates(){
 		Date sixteenWeeksOut = new DateUtil().createDate(2003, 4, 25);
 		assertEquals(sixteenWeeksOut, session.getEndDate());
