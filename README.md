@@ -1,4 +1,4 @@
-TESTING
+TESTING AGAIN
 
 Agile Java isn't just for rank beginners. It's also a good book for bringing experienced programmers new to the Java language up to speed. It won't replace a certification manual or one of those huge books of “Everything Java.” That's not its point. The point of Agile Java is to get you up to speed. Better yet, you come up to speed using TDD, which will serve you well in future learning and in your day-to-day work.
 
