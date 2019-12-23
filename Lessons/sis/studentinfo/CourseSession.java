@@ -24,11 +24,15 @@ public class CourseSession {
 	*
 	* @param startDate the date on which the CourseSession begins
 	*/
-	public CourseSession(String department, String number, Date startDate){
+	private CourseSession(String department, String number, Date startDate){
 		this.department = department;
 		this.number = number;
 		this.startDate = startDate;
-		CourseSession.incrementCount();
+	}
+	
+	public static CourseSession create(String department, String number, Date startDate){
+		incrementCount();
+		return new CourseSession(department, number, startDate);
 	}
 	
 	public void enroll(Student student){
