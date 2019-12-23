@@ -14,6 +14,7 @@ public class CourseSession {
 	private ArrayList<Student> students = new ArrayList<Student>();
 	private Date startDate;
 	private static int count;
+	private int numberOfCredits;
 	
 	static final String NEWLINE = System.getProperty("line.separator");
 	final static String ROSTER_REPORT_HEADER = "Student" + NEWLINE + "-----" + NEWLINE;
@@ -36,11 +37,16 @@ public class CourseSession {
 	}
 	
 	public void enroll(Student student){
+		student.addCredits(numberOfCredits);
 		students.add(student);
 	}
 	
 	public ArrayList<Student> getAllStudents() {
 		return students;
+	}
+	
+	void setNumberOfCredits(int numberOfCredits){
+		this.numberOfCredits = numberOfCredits;
 	}
 	
 	String getDepartment(){
