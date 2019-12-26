@@ -2,48 +2,111 @@ package chess;
 
 import java.util.*;
 import pieces.*;
+import util.StringUtil;
 
 class Board {
 
-	private ArrayList<Pawn> pawns = new ArrayList<Pawn>();
-	private ArrayList<Pawn> blackRank = new ArrayList<Pawn>();
-	private ArrayList<Pawn> whiteRank = new ArrayList<Pawn>();
-	private String blankRank = "........";
+	private ArrayList<Piece> pieces = new ArrayList<Piece>();
+	private ArrayList<Piece> blackFrontRank = new ArrayList<Piece>();
+	private ArrayList<Piece> blackRearRank = new ArrayList<Piece>();
+	private ArrayList<Piece> whiteFrontRank = new ArrayList<Piece>();
+	private ArrayList<Piece> whiteRearRank = new ArrayList<Piece>();
+	private String blankRank = StringUtil.appendNewLine("........");
 	
 	Board(){
 		initialize();
 	}
 	
-	int getNumberOfPieces(){
-		return pawns.size();
-	}
-	
-	void addBlackPawn(){
-		Pawn pawn = new Pawn("black", 'P');
-		pawns.add(pawn);
-		blackRank.add(pawn);
+	int pieceCount(){
+		return pieces.size();
 	}
 	
 	void addWhitePawn(){
-		Pawn pawn = new Pawn();
-		pawns.add(pawn);
-		whiteRank.add(pawn);
+		Piece pawn = new Piece("white", 'p');
+		pieces.add(pawn);
+		whiteFrontRank.add(pawn);
+	}
+
+	void addWhiteQueen(){
+		Piece queen = new Piece("white", 'q');
+		pieces.add(queen);
+		whiteRearRank.add(queen);
 	}
 	
-	String getRank(ArrayList<Pawn> pawns){
+	void addWhiteKing(){
+		Piece king = new Piece("white", 'k');
+		pieces.add(king);
+		whiteRearRank.add(king);
+	}
+	
+	void addWhiteKnight(){
+		Piece knight = new Piece("white", 'n');
+		pieces.add(knight);
+		whiteRearRank.add(knight);
+	}
+	
+	void addWhiteRook(){
+		Piece rook = new Piece("white", 'r');
+		pieces.add(rook);
+		whiteRearRank.add(rook);
+	}
+	
+	void addWhiteBishop(){
+		Piece bishop = new Piece("white", 'b');
+		pieces.add(bishop);
+		whiteRearRank.add(bishop);
+	}
+	
+	void addBlackPawn(){
+		Piece pawn = new Piece("black", 'P');
+		pieces.add(pawn);
+		blackFrontRank.add(pawn);
+	}
+	
+	void addBlackQueen(){
+		Piece queen = new Piece("black", 'Q');
+		pieces.add(queen);
+		blackRearRank.add(queen);
+	}
+	
+	void addBlackKing(){
+		Piece king = new Piece("black", 'K');
+		pieces.add(king);
+		blackRearRank.add(king);
+	}
+	
+	void addBlackKnight(){
+		Piece knight = new Piece("black", 'N');
+		pieces.add(knight);
+		blackRearRank.add(knight);
+	}
+	
+	void addBlackRook(){
+		Piece rook = new Piece("black", 'R');
+		pieces.add(rook);
+		blackRearRank.add(rook);
+	}
+	
+	void addBlackBishop(){
+		Piece bishop = new Piece("black", 'B');
+		pieces.add(bishop);
+		blackRearRank.add(bishop);
+	}
+	
+	String getRank(ArrayList<Piece> pieces){
 		StringBuilder buffer = new StringBuilder();
-		for (Pawn pawn : pawns){
-			buffer.append(pawn.getCharacterRepresentation());
+		for (Piece piece : pieces){
+			buffer.append(piece.getCharacterRepresentation());
 		}
-		return buffer.toString();
+		return StringUtil.appendNewLine(buffer.toString());
 	}
 	
 	String getEighthRank(){
-		return blankRank;
+		return getRank(blackRearRank);
 	}
 
 	String getSeventhRank(){
-		return getRank(blackRank);
+		return getRank(blackFrontRank);
 	}
 	
 	String getSixthRank(){
@@ -63,24 +126,22 @@ class Board {
 	}
 	
 	String getSecondRank(){
-		return getRank(whiteRank);
+		return getRank(whiteFrontRank);
 	}
 	
 	String getFirstRank(){
-		return blankRank;
+		return getRank(whiteRearRank);
 	}
 	
-
-	
 	void initialize(){
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
+		addBlackRook();
+		addBlackKnight();
+		addBlackBishop();
+		addBlackQueen();
+		addBlackKing();
+		addBlackBishop();
+		addBlackKnight();
+		addBlackRook();		
 		addBlackPawn();
 		addBlackPawn();
 		addBlackPawn();
@@ -88,6 +149,28 @@ class Board {
 		addBlackPawn();
 		addBlackPawn();
 		addBlackPawn();
-		addBlackPawn();		
+		addBlackPawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhitePawn();
+		addWhiteRook();
+		addWhiteKnight();
+		addWhiteBishop();
+		addWhiteQueen();
+		addWhiteKing();
+		addWhiteBishop();
+		addWhiteKnight();
+		addWhiteRook();		
+	}
+	
+	String print(){
+		return getEighthRank() + getSeventhRank() + getSixthRank() + 
+				getFifthRank() + getFourthRank() + getThirdRank() + 
+				getSecondRank() + getFirstRank();
 	}
 }
