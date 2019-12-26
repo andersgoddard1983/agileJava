@@ -8,7 +8,7 @@ import java.util.*;
 * @author Anders
 */
 
-public class CourseSession {
+public class CourseSession implements Comparable<CourseSession> {
 	private String department;
 	private String number;
 	private ArrayList<Student> students = new ArrayList<Student>();
@@ -45,16 +45,31 @@ public class CourseSession {
 		return students;
 	}
 	
-	void setNumberOfCredits(int numberOfCredits){
-		this.numberOfCredits = numberOfCredits;
-	}
-	
-	String getDepartment(){
+	public String getDepartment(){
 		return department;
 	}
 	
-	String getNumber(){
+	public String getNumber(){
 		return number;
+	}
+	
+	public int compareTo(CourseSession that){
+		int compare = this.getDepartment().compareTo(that.getDepartment());
+		if (compare == 0)
+			compare = this.getNumber().compareTo(that.getNumber());
+		return compare;
+	}
+	
+	static void resetCount(){
+		count = 0;
+	}
+	
+	static int getCount(){
+		return count;
+	}
+	
+	void setNumberOfCredits(int numberOfCredits){
+		this.numberOfCredits = numberOfCredits;
 	}
 	
 	int getNumberOfStudents(){
@@ -67,14 +82,6 @@ public class CourseSession {
 	
 	Date getStartDate(){
 		return startDate;
-	}
-	
-	static void resetCount(){
-		count = 0;
-	}
-	
-	static int getCount(){
-		return count;
 	}
 	
 	/**
