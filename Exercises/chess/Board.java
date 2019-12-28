@@ -22,75 +22,92 @@ class Board {
 	}
 	
 	void addWhitePawn(){
-		Piece pawn = new Piece("white", 'p');
+		Piece pawn = Piece.createWhitePawn();
+		pawn.setCharacterRepresentation('p');
 		pieces.add(pawn);
 		whiteFrontRank.add(pawn);
 	}
 
 	void addWhiteQueen(){
-		Piece queen = new Piece("white", 'q');
+		Piece queen = Piece.createWhiteQueen();
+		queen.setCharacterRepresentation('q');
 		pieces.add(queen);
 		whiteRearRank.add(queen);
 	}
 	
 	void addWhiteKing(){
-		Piece king = new Piece("white", 'k');
+		Piece king = Piece.createWhiteKing();
+		king.setCharacterRepresentation('k');
 		pieces.add(king);
 		whiteRearRank.add(king);
 	}
 	
 	void addWhiteKnight(){
-		Piece knight = new Piece("white", 'n');
+		Piece knight = Piece.createWhiteKnight();
+		knight.setCharacterRepresentation('n');
 		pieces.add(knight);
 		whiteRearRank.add(knight);
 	}
 	
 	void addWhiteRook(){
-		Piece rook = new Piece("white", 'r');
+		Piece rook = Piece.createWhiteRook();
+		rook.setCharacterRepresentation('r');
 		pieces.add(rook);
 		whiteRearRank.add(rook);
 	}
 	
 	void addWhiteBishop(){
-		Piece bishop = new Piece("white", 'b');
+		Piece bishop = Piece.createWhiteBishop();
+		bishop.setCharacterRepresentation('b');
 		pieces.add(bishop);
 		whiteRearRank.add(bishop);
 	}
 	
 	void addBlackPawn(){
-		Piece pawn = new Piece("black", 'P');
+		Piece pawn = Piece.createBlackPawn();
+		pawn.setCharacterRepresentation('P');
 		pieces.add(pawn);
 		blackFrontRank.add(pawn);
 	}
 	
 	void addBlackQueen(){
-		Piece queen = new Piece("black", 'Q');
+		Piece queen = Piece.createBlackQueen();
+		queen.setCharacterRepresentation('Q');
 		pieces.add(queen);
 		blackRearRank.add(queen);
 	}
 	
 	void addBlackKing(){
-		Piece king = new Piece("black", 'K');
+		Piece king = Piece.createBlackKing();
+		king.setCharacterRepresentation('K');
 		pieces.add(king);
 		blackRearRank.add(king);
 	}
 	
 	void addBlackKnight(){
-		Piece knight = new Piece("black", 'N');
+		Piece knight = Piece.createBlackKnight();
+		knight.setCharacterRepresentation('N');
 		pieces.add(knight);
 		blackRearRank.add(knight);
 	}
 	
 	void addBlackRook(){
-		Piece rook = new Piece("black", 'R');
+		Piece rook = Piece.createBlackRook();
+		rook.setCharacterRepresentation('R');
 		pieces.add(rook);
 		blackRearRank.add(rook);
 	}
 	
 	void addBlackBishop(){
-		Piece bishop = new Piece("black", 'B');
+		Piece bishop = Piece.createBlackBishop();
+		bishop.setCharacterRepresentation('B');
 		pieces.add(bishop);
 		blackRearRank.add(bishop);
+	}
+	
+	void addNoPiece(){
+		Piece blank = Piece.noPiece();
+		blank.setCharacterRepresentation('.');
 	}
 	
 	String getRank(ArrayList<Piece> pieces){
