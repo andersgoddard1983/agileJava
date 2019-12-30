@@ -3,46 +3,56 @@ package pieces;
 import junit.framework.TestCase;
 
 public class PieceTest extends TestCase {
+	
+	final static String WHITE = "WHITE";
+	final static String BLACK = "BLACK";
+	final static String PAWN = "PAWN";
+	final static String ROOK = "ROOK";
+	final static String KNIGHT = "KNIGHT";
+	final static String BISHOP = "BISHOP";
+	final static String QUEEN = "QUEEN";
+	final static String KING = "KING";	
+	
 	public void testCreate() {
 		
 		verifyCreation(
-		Piece.createWhitePawn(), 
-		Piece.createBlackPawn(),
+		Piece.createPiece(WHITE, PAWN), 
+		Piece.createPiece(BLACK, PAWN),
 		Piece.Type.PAWN, 
 		Piece.PAWN_REPRESENTATION
 		);
 		
 		verifyCreation(
-		Piece.createWhiteRook(), 
-		Piece.createBlackRook(),
+		Piece.createPiece(WHITE, ROOK), 
+		Piece.createPiece(BLACK, ROOK),
 		Piece.Type.ROOK, 
 		Piece.ROOK_REPRESENTATION
 		);
 		
 		verifyCreation(
-		Piece.createWhiteKnight(), 
-		Piece.createBlackKnight(),
+		Piece.createPiece(WHITE, KNIGHT), 
+		Piece.createPiece(BLACK, KNIGHT),
 		Piece.Type.KNIGHT, 
 		Piece.KNIGHT_REPRESENTATION
 		);
 		
 		verifyCreation(
-		Piece.createWhiteBishop(), 
-		Piece.createBlackBishop(),
+		Piece.createPiece(WHITE, BISHOP), 
+		Piece.createPiece(BLACK, BISHOP),
 		Piece.Type.BISHOP, 
 		Piece.BISHOP_REPRESENTATION
 		);
 		
 		verifyCreation(
-		Piece.createWhiteQueen(), 
-		Piece.createBlackQueen(),
+		Piece.createPiece(WHITE, QUEEN), 
+		Piece.createPiece(BLACK, QUEEN),
 		Piece.Type.QUEEN, 
 		Piece.QUEEN_REPRESENTATION
 		);
 		
 		verifyCreation(
-		Piece.createWhiteKing(), 
-		Piece.createBlackKing(),
+		Piece.createPiece(WHITE, KING), 
+		Piece.createPiece(BLACK, KING),
 		Piece.Type.KING, 
 		Piece.KING_REPRESENTATION
 		);
