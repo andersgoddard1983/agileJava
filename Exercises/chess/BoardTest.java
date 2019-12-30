@@ -6,7 +6,6 @@ import pieces.*;
 
 public class BoardTest extends TestCase {
 		private Board board;
-		private Board board2;
 		
 		protected void setUp(){
 		board = new Board();
@@ -17,9 +16,11 @@ public class BoardTest extends TestCase {
 		assertEquals(8, board.pieceCount("White", 'p'));
 		assertEquals(1, board.pieceCount("Black", 'K'));
 		assertEquals(2, board.pieceCount("White", 'r'));
+		assertEquals('k', board.getPieceAtPosition("e1"));
+		assertEquals('Q', board.getPieceAtPosition("d8"));
+		
 		
 		String blankRank = StringUtil.appendNewLine("........");
-		System.out.println(board.pieceCount());
 		assertEquals(
 			StringUtil.appendNewLine("RNBQKBNR") +
 			StringUtil.appendNewLine("PPPPPPPP") + 

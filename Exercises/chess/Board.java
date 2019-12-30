@@ -16,10 +16,16 @@ class Board {
 	final static String KING = "KING";	
 		
 	private ArrayList<Piece> pieces = new ArrayList<Piece>();
-	private ArrayList<Piece> blackFrontRank = new ArrayList<Piece>();
-	private ArrayList<Piece> blackRearRank = new ArrayList<Piece>();
-	private ArrayList<Piece> whiteFrontRank = new ArrayList<Piece>();
-	private ArrayList<Piece> whiteRearRank = new ArrayList<Piece>();
+	private ArrayList<Piece> firstRank = new ArrayList<Piece>();
+	private ArrayList<Piece> secondRank = new ArrayList<Piece>();
+	private ArrayList<Piece> thirdRank = new ArrayList<Piece>();
+	private ArrayList<Piece> fourthRank = new ArrayList<Piece>();
+	private ArrayList<Piece> fifthRank = new ArrayList<Piece>();
+	private ArrayList<Piece> sixthRank = new ArrayList<Piece>();
+	private ArrayList<Piece> seventhRank = new ArrayList<Piece>();
+	private ArrayList<Piece> eighthRank = new ArrayList<Piece>();
+	
+	private	ArrayList<ArrayList<Piece>> board = new ArrayList<ArrayList<Piece>>();
 		
 	Board(){
 		initialize();
@@ -38,85 +44,170 @@ class Board {
 		}
 		return count;
 	}
-	
-	void addWhitePawn(){
-		Piece pawn = Piece.createPiece(WHITE, PAWN);
-		pieces.add(pawn);
-		whiteFrontRank.add(pawn);
+
+	void populateEighthRank(){
+		addBlackRook(eighthRank);
+		addBlackKnight(eighthRank);
+		addBlackBishop(eighthRank);
+		addBlackQueen(eighthRank);
+		addBlackKing(eighthRank);
+		addBlackBishop(eighthRank);
+		addBlackKnight(eighthRank);
+		addBlackRook(eighthRank);
 	}
 
-	void addWhiteQueen(){
+	void populateSeventhRank(){
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+		addBlackPawn(seventhRank);
+	}
+
+	void populateSixthRank(){
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+		addNoPiece(sixthRank);
+	}
+
+	void populateFifthRank(){
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+		addNoPiece(fifthRank);
+	}
+
+	void populateFourthRank(){
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+		addNoPiece(fourthRank);
+	}
+	
+	void populateThirdRank(){
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+		addNoPiece(thirdRank);
+	}
+
+	void populateSecondRank(){
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);
+		addWhitePawn(secondRank);		
+	}	
+	
+	void populateFirstRank(){
+		addWhiteRook(firstRank);
+		addWhiteKnight(firstRank);
+		addWhiteBishop(firstRank);
+		addWhiteQueen(firstRank);
+		addWhiteKing(firstRank);
+		addWhiteBishop(firstRank);
+		addWhiteKnight(firstRank);
+		addWhiteRook(firstRank);
+	}
+		
+	void addWhitePawn(ArrayList<Piece> rank){
+		Piece pawn = Piece.createPiece(WHITE, PAWN);
+		pieces.add(pawn);
+		rank.add(pawn);
+	}
+	
+	void addWhiteQueen(ArrayList<Piece> rank){
 		Piece queen = Piece.createPiece(WHITE, QUEEN);
 		pieces.add(queen);
-		whiteRearRank.add(queen);
+		rank.add(queen);
 	}
 	
-	void addWhiteKing(){
+	void addWhiteKing(ArrayList<Piece> rank){
 		Piece king = Piece.createPiece(WHITE, KING);
 		pieces.add(king);
-		whiteRearRank.add(king);
+		rank.add(king);
 	}
 	
-	void addWhiteKnight(){
+	void addWhiteKnight(ArrayList<Piece> rank){
 		Piece knight = Piece.createPiece(WHITE, KNIGHT);
 		pieces.add(knight);
-		whiteRearRank.add(knight);
+		rank.add(knight);
 	}
 	
-	void addWhiteRook(){
+	void addWhiteRook(ArrayList<Piece> rank){
 		Piece rook = Piece.createPiece(WHITE, ROOK);
 		pieces.add(rook);
-		whiteRearRank.add(rook);
+		rank.add(rook);
 	}
 	
-	void addWhiteBishop(){
+	void addWhiteBishop(ArrayList<Piece> rank){
 		Piece bishop = Piece.createPiece(WHITE, BISHOP);
 		pieces.add(bishop);
-		whiteRearRank.add(bishop);
-	}
+		rank.add(bishop);
+	}	
 	
-	void addBlackPawn(){
+	void addBlackPawn(ArrayList<Piece> rank){
 		Piece pawn = Piece.createPiece(BLACK, PAWN);
 		pieces.add(pawn);
-		blackFrontRank.add(pawn);
+		rank.add(pawn);
 	}
 	
-	void addBlackQueen(){
+	void addBlackQueen(ArrayList<Piece> rank){
 		Piece queen = Piece.createPiece(BLACK, QUEEN);
 		pieces.add(queen);
-		blackRearRank.add(queen);
+		rank.add(queen);
 	}
 	
-	void addBlackKing(){
+	void addBlackKing(ArrayList<Piece> rank){
 		Piece king = Piece.createPiece(BLACK, KING);
 		pieces.add(king);
-		blackRearRank.add(king);
+		rank.add(king);
 	}
-	
-	void addBlackKnight(){
+
+	void addBlackKnight(ArrayList<Piece> rank){
 		Piece knight = Piece.createPiece(BLACK, KNIGHT);
 		pieces.add(knight);
-		blackRearRank.add(knight);
+		rank.add(knight);
 	}
 	
-	void addBlackRook(){
+	void addBlackRook(ArrayList<Piece> rank){
 		Piece rook = Piece.createPiece(BLACK, ROOK);
 		pieces.add(rook);
-		blackRearRank.add(rook);
+		rank.add(rook);
 	}
 	
-	void addBlackBishop(){
+	void addBlackBishop(ArrayList<Piece> rank){
 		Piece bishop = Piece.createPiece(BLACK, BISHOP);
 		pieces.add(bishop);
-		blackRearRank.add(bishop);
+		rank.add(bishop);
 	}
 	
-	String getBlankRank(){
-		return StringUtil.appendNewLine("........");
-	}
-	
-	void addNoPiece(){
+	void addNoPiece(ArrayList<Piece> rank){
 		Piece blank = Piece.noPiece();
+		rank.add(blank);
 	}
 	
 	String getRank(ArrayList<Piece> pieces){
@@ -127,88 +218,93 @@ class Board {
 		return StringUtil.appendNewLine(buffer.toString());
 	}
 	
-	void createEighthRank(){
-		addBlackRook();
-		addBlackKnight();
-		addBlackBishop();
-		addBlackQueen();
-		addBlackKing();
-		addBlackBishop();
-		addBlackKnight();
-		addBlackRook();		
-	}
-	
 	String getEighthRank(){
-		return getRank(blackRearRank);
-	}
-	
-	void createSeventhRank(){
-		addBlackPawn();
-		addBlackPawn();
-		addBlackPawn();
-		addBlackPawn();
-		addBlackPawn();
-		addBlackPawn();
-		addBlackPawn();
-		addBlackPawn();		
+		return getRank(eighthRank);
 	}
 
 	String getSeventhRank(){
-		return getRank(blackFrontRank);
+		return getRank(seventhRank);
 	}
 	
 	String getSixthRank(){
-		return getBlankRank();
+		return getRank(sixthRank);
 	}
 	
 	String getFifthRank(){
-		return getBlankRank();
+		return getRank(fifthRank);
 	}
 	
 	String getFourthRank(){
-		return getBlankRank();
+		return getRank(fourthRank);
 	}
 	
 	String getThirdRank(){
-		return getBlankRank();
+		return getRank(thirdRank);
 	}
-	
-	void createSecondRank(){
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();
-		addWhitePawn();		
-	}
-	
+
 	String getSecondRank(){
-		return getRank(whiteFrontRank);
-	}
-	
-	void createFirstRank(){
-		addWhiteRook();
-		addWhiteKnight();
-		addWhiteBishop();
-		addWhiteQueen();
-		addWhiteKing();
-		addWhiteBishop();
-		addWhiteKnight();
-		addWhiteRook();	
+		return getRank(secondRank);
 	}
 	
 	String getFirstRank(){
-		return getRank(whiteRearRank);
+		return getRank(firstRank);
 	}
 	
 	void initialize(){
-		createEighthRank();
-		createSeventhRank();
-
-		createSecondRank();
-		createFirstRank();
+		createRanks();
+		populateFirstRank();
+		populateSecondRank();
+		populateThirdRank();
+		populateFourthRank();
+		populateFifthRank();
+		populateSixthRank();
+		populateSeventhRank();
+		populateEighthRank();
+	}
+	
+	void createRanks(){
+		board.add(firstRank);
+		board.add(secondRank);
+		board.add(thirdRank);
+		board.add(fourthRank);
+		board.add(fifthRank);
+		board.add(sixthRank);
+		board.add(seventhRank);
+		board.add(eighthRank);		
+	}
+	
+	int getFileInt(char file){
+		int fileInt = -1;
+		if (file == 'a')
+			fileInt = 0;
+		if (file == 'b')
+			fileInt = 1;
+		if (file == 'c')
+			fileInt = 2;
+		if (file == 'd')
+			fileInt = 3;
+		if (file == 'e')
+			fileInt = 4;
+		if (file == 'f')
+			fileInt = 5;
+		if (file == 'g')
+			fileInt = 6;
+		if (file == 'h')
+			fileInt = 7;
+		return fileInt;		
+	}
+	
+	public char getPieceAtPosition(String location){
+		char file = location.charAt(0);
+		int fileInt = getFileInt(file);
+		
+		String rankString = location.substring(1, 2);
+		int rankInt = Integer.parseInt(rankString)-1;
+		
+		ArrayList<Piece> rank = board.get(rankInt);
+		Piece piece = rank.get(fileInt);
+		
+		return piece.getCharacterRepresentation();
 	}
 	
 	String print(){
