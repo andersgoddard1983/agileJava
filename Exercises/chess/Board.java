@@ -14,6 +14,14 @@ class Board {
 	final static String BISHOP = "BISHOP";
 	final static String QUEEN = "QUEEN";
 	final static String KING = "KING";	
+	final static int LENGTH_OF_RANK = 8;
+	
+	final static double QUEEN_STRENGTH = 9;
+	final static double ROOK_STRENGTH = 5;
+	final static double BISHOP_STRENGTH = 3;
+	final static double KNIGHT_STRENGTH = 2.5;
+	final static double PAWN_STRENGTH = 1;
+	final static double PAWN_HALF_STRENGTH = 0.5;
 		
 	private ArrayList<Piece> pieces = new ArrayList<Piece>();
 	private ArrayList<Piece> firstRank = new ArrayList<Piece>();
@@ -31,6 +39,81 @@ class Board {
 		initialize();
 	}
 	
+	public double getStrength(String color){
+		double strength = 0;
+		if (color.toUpperCase().equals(WHITE)){
+			strength = strength + (pieceCount("White", 'r') * ROOK_STRENGTH);
+			strength = strength + (pieceCount("White", 'q') * QUEEN_STRENGTH);
+			strength = strength + (pieceCount("White", 'n') * KNIGHT_STRENGTH);
+			strength = strength + (pieceCount("White", 'b') * BISHOP_STRENGTH);
+			strength = strength + getPawnStrength("White");
+		} else if (color.toUpperCase().equals(BLACK)){
+			strength = strength + (pieceCount("Black", 'R') * ROOK_STRENGTH);
+			strength = strength + (pieceCount("Black", 'Q') * QUEEN_STRENGTH);			
+			strength = strength + (pieceCount("Black", 'N') * KNIGHT_STRENGTH);			
+			strength = strength + (pieceCount("Black", 'B') * BISHOP_STRENGTH);		
+			strength = strength + getPawnStrength("Black");
+		}
+	return strength;
+	}
+	
+	public double getPawnStrength(String color){
+		double pawnStrengthCount = 0.0;
+		char characterRepresentation = 'p';
+		
+		if (color == BLACK)
+			Character.toUpperCase(characterRepresentation);
+		int pawnCount = pieceCount(color, characterRepresentation);
+		
+		for (ArrayList<Piece> rank : board){
+			boolean pawnInFile = false;
+			for (Piece piece : rank){
+				if (piece.getCharacterRepresentation() == characterRepresentation){
+					if (pawnInFile)
+						pawnStrengthCount += PAWN_HALF_STRENGTH;
+					else 
+						pawnStrengthCount += PAWN_STRENGTH;
+						pawnInFile = true;
+				}
+			}
+		}
+		
+		return pawnStrengthCount;
+	}
+	
+	void initialize(){
+		createRanks();
+		createFiles();
+	}
+	
+	void createRanks(){
+		board.add(firstRank);
+		board.add(secondRank);
+		board.add(thirdRank);
+		board.add(fourthRank);
+		board.add(fifthRank);
+		board.add(sixthRank);
+		board.add(seventhRank);
+		board.add(eighthRank);		
+	}
+	
+	void createFiles(){
+		createFile(firstRank);
+		createFile(secondRank);
+		createFile(thirdRank);
+		createFile(fourthRank);
+		createFile(fifthRank);
+		createFile(sixthRank);
+		createFile(seventhRank);
+		createFile(eighthRank);
+	}
+	
+	void createFile(ArrayList<Piece> rank){
+		for (int i = 0; i < LENGTH_OF_RANK; i++){
+		addNoPiece(rank);
+		}
+	}
+	
 	int pieceCount(){
 		return pieces.size();
 	}
@@ -43,94 +126,6 @@ class Board {
 				count += 1;
 		}
 		return count;
-	}
-
-	void populateEighthRank(){
-		addBlackRook(eighthRank);
-		addBlackKnight(eighthRank);
-		addBlackBishop(eighthRank);
-		addBlackQueen(eighthRank);
-		addBlackKing(eighthRank);
-		addBlackBishop(eighthRank);
-		addBlackKnight(eighthRank);
-		addBlackRook(eighthRank);
-	}
-
-	void populateSeventhRank(){
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-		addBlackPawn(seventhRank);
-	}
-
-	void populateSixthRank(){
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-		addNoPiece(sixthRank);
-	}
-
-	void populateFifthRank(){
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-		addNoPiece(fifthRank);
-	}
-
-	void populateFourthRank(){
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-		addNoPiece(fourthRank);
-	}
-	
-	void populateThirdRank(){
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-		addNoPiece(thirdRank);
-	}
-
-	void populateSecondRank(){
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);
-		addWhitePawn(secondRank);		
-	}	
-	
-	void populateFirstRank(){
-		addWhiteRook(firstRank);
-		addWhiteKnight(firstRank);
-		addWhiteBishop(firstRank);
-		addWhiteQueen(firstRank);
-		addWhiteKing(firstRank);
-		addWhiteBishop(firstRank);
-		addWhiteKnight(firstRank);
-		addWhiteRook(firstRank);
 	}
 		
 	void addWhitePawn(ArrayList<Piece> rank){
@@ -250,27 +245,30 @@ class Board {
 		return getRank(firstRank);
 	}
 	
-	void initialize(){
-		createRanks();
-		populateFirstRank();
-		populateSecondRank();
-		populateThirdRank();
-		populateFourthRank();
-		populateFifthRank();
-		populateSixthRank();
-		populateSeventhRank();
-		populateEighthRank();
+	public char getPieceAtPosition(String location){
+		int fileIndex = getFileInt(getFile(location));
+		
+		String rankIndexString = location.substring(1, 2);
+		int rankIndex = Integer.parseInt(rankIndexString)-1;
+		
+		ArrayList<Piece> rank = board.get(rankIndex);
+		Piece piece = rank.get(fileIndex);
+		return piece.getCharacterRepresentation();
 	}
 	
-	void createRanks(){
-		board.add(firstRank);
-		board.add(secondRank);
-		board.add(thirdRank);
-		board.add(fourthRank);
-		board.add(fifthRank);
-		board.add(sixthRank);
-		board.add(seventhRank);
-		board.add(eighthRank);		
+	public void setPieceAtPosition(String location, Piece piece){
+		int fileIndex = getFileInt(getFile(location));
+		
+		String rankIndexString = location.substring(1, 2);
+		int rankIndex = Integer.parseInt(rankIndexString)-1;
+		
+		ArrayList<Piece> rank = board.get(rankIndex);
+		rank.set(fileIndex, piece);
+		pieces.add(piece);
+	}
+	
+	char getFile (String location){
+		return location.charAt(0);
 	}
 	
 	int getFileInt(char file){
@@ -292,19 +290,6 @@ class Board {
 		if (file == 'h')
 			fileInt = 7;
 		return fileInt;		
-	}
-	
-	public char getPieceAtPosition(String location){
-		char file = location.charAt(0);
-		int fileInt = getFileInt(file);
-		
-		String rankString = location.substring(1, 2);
-		int rankInt = Integer.parseInt(rankString)-1;
-		
-		ArrayList<Piece> rank = board.get(rankInt);
-		Piece piece = rank.get(fileInt);
-		
-		return piece.getCharacterRepresentation();
 	}
 	
 	String print(){
