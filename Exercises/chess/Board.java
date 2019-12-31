@@ -127,7 +127,8 @@ class Board {
 		}
 		return count;
 	}
-		
+
+/*		
 	void addWhitePawn(ArrayList<Piece> rank){
 		Piece pawn = Piece.createPiece(WHITE, PAWN);
 		pieces.add(pawn);
@@ -199,6 +200,9 @@ class Board {
 		pieces.add(bishop);
 		rank.add(bishop);
 	}
+
+	*/
+
 	
 	void addNoPiece(ArrayList<Piece> rank){
 		Piece blank = Piece.noPiece();
@@ -211,38 +215,6 @@ class Board {
 			buffer.append(piece.getCharacterRepresentation());
 		}
 		return StringUtil.appendNewLine(buffer.toString());
-	}
-	
-	String getEighthRank(){
-		return getRank(eighthRank);
-	}
-
-	String getSeventhRank(){
-		return getRank(seventhRank);
-	}
-	
-	String getSixthRank(){
-		return getRank(sixthRank);
-	}
-	
-	String getFifthRank(){
-		return getRank(fifthRank);
-	}
-	
-	String getFourthRank(){
-		return getRank(fourthRank);
-	}
-	
-	String getThirdRank(){
-		return getRank(thirdRank);
-	}
-
-	String getSecondRank(){
-		return getRank(secondRank);
-	}
-	
-	String getFirstRank(){
-		return getRank(firstRank);
 	}
 	
 	public char getPieceAtPosition(String location){
@@ -293,8 +265,8 @@ class Board {
 	}
 	
 	String print(){
-		return getEighthRank() + getSeventhRank() + getSixthRank() + 
-				getFifthRank() + getFourthRank() + getThirdRank() + 
-				getSecondRank() + getFirstRank();
+		return getRank(eighthRank) + getRank(seventhRank) + getRank(sixthRank) + 
+				getRank(fifthRank) + getRank(fourthRank) + getRank(thirdRank) + 
+				getRank(secondRank) + getRank(firstRank);
 	}
 }
