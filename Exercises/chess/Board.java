@@ -129,38 +129,6 @@ class Board {
 			count = 0;
 		}
 	}
-
-	
-	public double getPawnStrength(String color){
-		double pawnStrengthCount = 0.0;
-		
-		char characterRepresentation = 'p';
-		int pawnsAtIndex[] = new int[LENGTH_OF_RANK];
-
-		int count = 0;
-		
-		if (color.toUpperCase().equals(BLACK))
-			characterRepresentation = Character.toUpperCase(characterRepresentation);
-		
-		for (ArrayList<Piece> rank : board){
-			for (Piece piece : rank){
-				if (piece.getCharacterRepresentation() == characterRepresentation){
-					pawnsAtIndex[count] = pawnsAtIndex[count] + 1;
-				}
-				count += 1;
-			}
-			count = 0;
-		}
-		
-		for (int i = 0; i < pawnsAtIndex.length; i++){
-			if (pawnsAtIndex[i] == 1)
-				pawnStrengthCount += PAWN_STRENGTH;
-			if (pawnsAtIndex[i] > 1)
-				pawnStrengthCount += pawnsAtIndex[i] * PAWN_HALF_STRENGTH;
-		}
-		
-		return pawnStrengthCount;
-	}
 	
 	void initialize(){
 		createRanks();
