@@ -1,25 +1,26 @@
 package pieces;
 
+import static util.ConstantUtil.WHITE;
+import static util.ConstantUtil.BLACK;
+import static util.ConstantUtil.PAWN;
+import static util.ConstantUtil.ROOK;
+import static util.ConstantUtil.KNIGHT;
+import static util.ConstantUtil.BISHOP;
+import static util.ConstantUtil.QUEEN;
+import static util.ConstantUtil.KING;
+import static util.ConstantUtil.PAWN_REPRESENTATION;
+import static util.ConstantUtil.ROOK_REPRESENTATION;
+import static util.ConstantUtil.KNIGHT_REPRESENTATION;
+import static util.ConstantUtil.BISHOP_REPRESENTATION;
+import static util.ConstantUtil.QUEEN_REPRESENTATION;
+import static util.ConstantUtil.KING_REPRESENTATION;
+
 public class Piece {
-	final static String WHITE = "WHITE";
-	final static String BLACK = "BLACK";
-	final static String PAWN = "PAWN";
-	final static String ROOK = "ROOK";
-	final static String KNIGHT = "KNIGHT";
-	final static String BISHOP = "BISHOP";
-	final static String QUEEN = "QUEEN";
-	final static String KING = "KING";	
 
 	private enum Color {BLACK, WHITE, NO_COLOR};
 	enum Type {PAWN, ROOK, KNIGHT, BISHOP, KING, QUEEN, NO_PIECE}
 	Color color;
 	Type type;
-	public static char PAWN_REPRESENTATION = 'p';
-	public static char ROOK_REPRESENTATION = 'r';
-	public static char KNIGHT_REPRESENTATION = 'n';
-	public static char BISHOP_REPRESENTATION = 'b';
-	public static char QUEEN_REPRESENTATION = 'q';
-	public static char KING_REPRESENTATION = 'k';
 	char characterRepresentation;
 	double strength;
 	
@@ -86,27 +87,27 @@ public class Piece {
 		Piece piece = new Piece(null, Type.NO_PIECE);
 		if (type.toUpperCase() == PAWN){
 			piece.setType(Type.PAWN);
-			piece.setCharacterRepresentation('p');
+			piece.setCharacterRepresentation(PAWN_REPRESENTATION);
 		} 
 		if (type.toUpperCase() == ROOK){
 			piece.setType(Type.ROOK);
-			piece.setCharacterRepresentation('r');
+			piece.setCharacterRepresentation(ROOK_REPRESENTATION);
 		}
 		if (type.toUpperCase() == KNIGHT){
 			piece.setType(Type.KNIGHT);
-			piece.setCharacterRepresentation('n');
+			piece.setCharacterRepresentation(KNIGHT_REPRESENTATION);
 		}
 		if (type.toUpperCase() == BISHOP){
 			piece.setType(Type.BISHOP);
-			piece.setCharacterRepresentation('b');
+			piece.setCharacterRepresentation(BISHOP_REPRESENTATION);
 		}
 		if (type.toUpperCase() == QUEEN){
 			piece.setType(Type.QUEEN);
-			piece.setCharacterRepresentation('q');
+			piece.setCharacterRepresentation(QUEEN_REPRESENTATION);
 		}
 		if (type.toUpperCase() == KING){
 			piece.setType(Type.KING);
-			piece.setCharacterRepresentation('k');
+			piece.setCharacterRepresentation(KING_REPRESENTATION);
 		}
 		if (color.toUpperCase() == WHITE)
 			piece.setColor(Color.WHITE);

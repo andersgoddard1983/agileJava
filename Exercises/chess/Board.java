@@ -3,17 +3,23 @@ package chess;
 import java.util.*;
 import pieces.*;
 import util.StringUtil;
+import static util.ConstantUtil.WHITE;
+import static util.ConstantUtil.BLACK;
+import static util.ConstantUtil.PAWN;
+import static util.ConstantUtil.ROOK;
+import static util.ConstantUtil.KNIGHT;
+import static util.ConstantUtil.BISHOP;
+import static util.ConstantUtil.QUEEN;
+import static util.ConstantUtil.KING;
+import static util.ConstantUtil.PAWN_REPRESENTATION;
+import static util.ConstantUtil.ROOK_REPRESENTATION;
+import static util.ConstantUtil.KNIGHT_REPRESENTATION;
+import static util.ConstantUtil.BISHOP_REPRESENTATION;
+import static util.ConstantUtil.QUEEN_REPRESENTATION;
+import static util.ConstantUtil.KING_REPRESENTATION;
 
 class Board {
 	
-	final static String WHITE = "WHITE";
-	final static String BLACK = "BLACK";
-	final static String PAWN = "PAWN";
-	final static String ROOK = "ROOK";
-	final static String KNIGHT = "KNIGHT";
-	final static String BISHOP = "BISHOP";
-	final static String QUEEN = "QUEEN";
-	final static String KING = "KING";	
 	final static int LENGTH_OF_RANK = 8;
 	
 	final static double QUEEN_STRENGTH = 9;
@@ -37,97 +43,6 @@ class Board {
 		
 	Board(){
 		initialize();
-	}
-	
-	/*
-	public double getStrength(String color){
-		double strength = 0;
-		if (color.toUpperCase().equals(WHITE)){
-			strength = strength + (pieceCount("White", 'r') * ROOK_STRENGTH);
-			strength = strength + (pieceCount("White", 'q') * QUEEN_STRENGTH);
-			strength = strength + (pieceCount("White", 'n') * KNIGHT_STRENGTH);
-			strength = strength + (pieceCount("White", 'b') * BISHOP_STRENGTH);
-			strength = strength + getPawnStrength("White");
-		} else if (color.toUpperCase().equals(BLACK)){
-			strength = strength + (pieceCount("Black", 'R') * ROOK_STRENGTH);
-			strength = strength + (pieceCount("Black", 'Q') * QUEEN_STRENGTH);			
-			strength = strength + (pieceCount("Black", 'N') * KNIGHT_STRENGTH);			
-			strength = strength + (pieceCount("Black", 'B') * BISHOP_STRENGTH);		
-			strength = strength + getPawnStrength("Black");
-		}
-	return strength;
-	}
-	*/
-	
-	
-	public void setPieceStrength(String color){
-		for (ArrayList<Piece> rank : board){
-			for (Piece piece : rank){
-				if (piece.getColor().equals(color.toUpperCase())){
-					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'Q')
-						piece.setStrength(QUEEN_STRENGTH);
-					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'R')
-						piece.setStrength(ROOK_STRENGTH);
-					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'B')
-						piece.setStrength(BISHOP_STRENGTH);
-					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'N')
-						piece.setStrength(KNIGHT_STRENGTH);
-				}
-			}
-		}
-		setPawnStrength(color);
-	}
-
-
-	
-	public double getStrength(String color){
-		double strength = 0;
-		
-		for (ArrayList<Piece> rank : board){
-			for (Piece piece : rank){
-				if (piece.getColor().equals(color.toUpperCase())){
-					strength += piece.getStrength();					
-				}
-			}
-		}
-		return strength;
-	}
-	
-
-
-	void setPawnStrength(String color){
-		char characterRepresentation = 'p';
-		int pawnsAtIndex[] = new int[LENGTH_OF_RANK];
-		
-		int count = 0;
-		
-		if (color.toUpperCase().equals(BLACK))
-			characterRepresentation = Character.toUpperCase(characterRepresentation);
-				
-		for (ArrayList<Piece> rank : board){
-			for (Piece piece : rank){
-				if (piece.getCharacterRepresentation() == characterRepresentation){
-					pawnsAtIndex[count] = pawnsAtIndex[count] + 1;
-				}
-				count += 1;
-			}
-			count = 0;
-		}
-		
-		for (ArrayList<Piece> rank : board){
-			for (Piece piece : rank){
-				if (piece.getCharacterRepresentation() == characterRepresentation){
-					if (pawnsAtIndex[count] > 1){
-						piece.setStrength(PAWN_HALF_STRENGTH);
-					}
-					else {
-						piece.setStrength(PAWN_STRENGTH);
-					}
-				}
-			count += 1;
-			} 
-			count = 0;
-		}
 	}
 	
 	void initialize(){
@@ -177,82 +92,72 @@ class Board {
 		}
 		return count;
 	}
-
-/*		
-	void addWhitePawn(ArrayList<Piece> rank){
-		Piece pawn = Piece.createPiece(WHITE, PAWN);
-		pieces.add(pawn);
-		rank.add(pawn);
+	
+		public void setPieceStrength(String color){
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getColor().equals(color.toUpperCase())){
+					if (Character.toLowerCase(piece.getCharacterRepresentation()) == QUEEN_REPRESENTATION)
+						piece.setStrength(QUEEN_STRENGTH);
+					if (Character.toLowerCase(piece.getCharacterRepresentation()) == ROOK_REPRESENTATION)
+						piece.setStrength(ROOK_STRENGTH);
+					if (Character.toLowerCase(piece.getCharacterRepresentation()) == BISHOP_REPRESENTATION)
+						piece.setStrength(BISHOP_STRENGTH);
+					if (Character.toLowerCase(piece.getCharacterRepresentation()) == KNIGHT_REPRESENTATION)
+						piece.setStrength(KNIGHT_STRENGTH);
+				}
+			}
+		}
+		setPawnStrength(color);
 	}
 	
-	void addWhiteQueen(ArrayList<Piece> rank){
-		Piece queen = Piece.createPiece(WHITE, QUEEN);
-		pieces.add(queen);
-		rank.add(queen);
+	void setPawnStrength(String color){
+		char characterRepresentation = PAWN_REPRESENTATION;
+		int pawnsAtIndex[] = new int[LENGTH_OF_RANK];
+		
+		int count = 0;
+		
+		if (color.toUpperCase().equals(BLACK))
+			characterRepresentation = Character.toUpperCase(characterRepresentation);
+				
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getCharacterRepresentation() == characterRepresentation){
+					pawnsAtIndex[count] = pawnsAtIndex[count] + 1;
+				}
+				count += 1;
+			}
+			count = 0;
+		}
+		
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getCharacterRepresentation() == characterRepresentation){
+					if (pawnsAtIndex[count] > 1){
+						piece.setStrength(PAWN_HALF_STRENGTH);
+					}
+					else {
+						piece.setStrength(PAWN_STRENGTH);
+					}
+				}
+			count += 1;
+			} 
+			count = 0;
+		}
 	}
 	
-	void addWhiteKing(ArrayList<Piece> rank){
-		Piece king = Piece.createPiece(WHITE, KING);
-		pieces.add(king);
-		rank.add(king);
+	public double getStrength(String color){
+		double strength = 0;
+		
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getColor().equals(color.toUpperCase())){
+					strength += piece.getStrength();					
+				}
+			}
+		}
+		return strength;
 	}
-	
-	void addWhiteKnight(ArrayList<Piece> rank){
-		Piece knight = Piece.createPiece(WHITE, KNIGHT);
-		pieces.add(knight);
-		rank.add(knight);
-	}
-	
-	void addWhiteRook(ArrayList<Piece> rank){
-		Piece rook = Piece.createPiece(WHITE, ROOK);
-		pieces.add(rook);
-		rank.add(rook);
-	}
-	
-	void addWhiteBishop(ArrayList<Piece> rank){
-		Piece bishop = Piece.createPiece(WHITE, BISHOP);
-		pieces.add(bishop);
-		rank.add(bishop);
-	}	
-	
-	void addBlackPawn(ArrayList<Piece> rank){
-		Piece pawn = Piece.createPiece(BLACK, PAWN);
-		pieces.add(pawn);
-		rank.add(pawn);
-	}
-	
-	void addBlackQueen(ArrayList<Piece> rank){
-		Piece queen = Piece.createPiece(BLACK, QUEEN);
-		pieces.add(queen);
-		rank.add(queen);
-	}
-	
-	void addBlackKing(ArrayList<Piece> rank){
-		Piece king = Piece.createPiece(BLACK, KING);
-		pieces.add(king);
-		rank.add(king);
-	}
-
-	void addBlackKnight(ArrayList<Piece> rank){
-		Piece knight = Piece.createPiece(BLACK, KNIGHT);
-		pieces.add(knight);
-		rank.add(knight);
-	}
-	
-	void addBlackRook(ArrayList<Piece> rank){
-		Piece rook = Piece.createPiece(BLACK, ROOK);
-		pieces.add(rook);
-		rank.add(rook);
-	}
-	
-	void addBlackBishop(ArrayList<Piece> rank){
-		Piece bishop = Piece.createPiece(BLACK, BISHOP);
-		pieces.add(bishop);
-		rank.add(bishop);
-	}
-
-	*/
-
 	
 	void addNoPiece(ArrayList<Piece> rank){
 		Piece blank = Piece.noPiece();
