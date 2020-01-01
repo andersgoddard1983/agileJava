@@ -39,6 +39,7 @@ class Board {
 		initialize();
 	}
 	
+	/*
 	public double getStrength(String color){
 		double strength = 0;
 		if (color.toUpperCase().equals(WHITE)){
@@ -56,26 +57,106 @@ class Board {
 		}
 	return strength;
 	}
+	*/
+	
+	
+	public void setPieceStrength(String color){
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getColor().equals(color.toUpperCase())){
+					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'Q')
+						piece.setStrength(QUEEN_STRENGTH);
+					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'R')
+						piece.setStrength(ROOK_STRENGTH);
+					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'B')
+						piece.setStrength(BISHOP_STRENGTH);
+					if (Character.toUpperCase(piece.getCharacterRepresentation()) == 'N')
+						piece.setStrength(KNIGHT_STRENGTH);
+				}
+			}
+		}
+		setPawnStrength(color);
+	}
+
+
+	
+	public double getStrength(String color){
+		double strength = 0;
+		
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getColor().equals(color.toUpperCase())){
+					strength += piece.getStrength();					
+				}
+			}
+		}
+		return strength;
+	}
+	
+
+
+	void setPawnStrength(String color){
+		char characterRepresentation = 'p';
+		int pawnsAtIndex[] = new int[LENGTH_OF_RANK];
+		
+		int count = 0;
+		
+		if (color.toUpperCase().equals(BLACK))
+			characterRepresentation = Character.toUpperCase(characterRepresentation);
+				
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getCharacterRepresentation() == characterRepresentation){
+					pawnsAtIndex[count] = pawnsAtIndex[count] + 1;
+				}
+				count += 1;
+			}
+			count = 0;
+		}
+		
+		for (ArrayList<Piece> rank : board){
+			for (Piece piece : rank){
+				if (piece.getCharacterRepresentation() == characterRepresentation){
+					if (pawnsAtIndex[count] > 1){
+						piece.setStrength(PAWN_HALF_STRENGTH);
+					}
+					else {
+						piece.setStrength(PAWN_STRENGTH);
+					}
+				}
+			count += 1;
+			} 
+			count = 0;
+		}
+	}
+
 	
 	public double getPawnStrength(String color){
 		double pawnStrengthCount = 0.0;
-		char characterRepresentation = 'p';
 		
-		if (color == BLACK)
-			Character.toUpperCase(characterRepresentation);
-		int pawnCount = pieceCount(color, characterRepresentation);
+		char characterRepresentation = 'p';
+		int pawnsAtIndex[] = new int[LENGTH_OF_RANK];
+
+		int count = 0;
+		
+		if (color.toUpperCase().equals(BLACK))
+			characterRepresentation = Character.toUpperCase(characterRepresentation);
 		
 		for (ArrayList<Piece> rank : board){
-			boolean pawnInFile = false;
 			for (Piece piece : rank){
 				if (piece.getCharacterRepresentation() == characterRepresentation){
-					if (pawnInFile)
-						pawnStrengthCount += PAWN_HALF_STRENGTH;
-					else 
-						pawnStrengthCount += PAWN_STRENGTH;
-						pawnInFile = true;
+					pawnsAtIndex[count] = pawnsAtIndex[count] + 1;
 				}
+				count += 1;
 			}
+			count = 0;
+		}
+		
+		for (int i = 0; i < pawnsAtIndex.length; i++){
+			if (pawnsAtIndex[i] == 1)
+				pawnStrengthCount += PAWN_STRENGTH;
+			if (pawnsAtIndex[i] > 1)
+				pawnStrengthCount += pawnsAtIndex[i] * PAWN_HALF_STRENGTH;
 		}
 		
 		return pawnStrengthCount;
@@ -87,25 +168,26 @@ class Board {
 	}
 	
 	void createRanks(){
-		board.add(firstRank);
-		board.add(secondRank);
-		board.add(thirdRank);
-		board.add(fourthRank);
-		board.add(fifthRank);
-		board.add(sixthRank);
-		board.add(seventhRank);
 		board.add(eighthRank);		
+		board.add(seventhRank);
+		board.add(sixthRank);
+		board.add(fifthRank);
+		board.add(fourthRank);
+		board.add(thirdRank);
+		board.add(secondRank);
+		board.add(firstRank);
+
 	}
 	
 	void createFiles(){
-		createFile(firstRank);
-		createFile(secondRank);
-		createFile(thirdRank);
-		createFile(fourthRank);
-		createFile(fifthRank);
-		createFile(sixthRank);
-		createFile(seventhRank);
 		createFile(eighthRank);
+		createFile(seventhRank);
+		createFile(sixthRank);
+		createFile(fifthRank);
+		createFile(fourthRank);
+		createFile(thirdRank);
+		createFile(secondRank);
+		createFile(firstRank);
 	}
 	
 	void createFile(ArrayList<Piece> rank){

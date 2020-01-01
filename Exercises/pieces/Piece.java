@@ -10,7 +10,7 @@ public class Piece {
 	final static String QUEEN = "QUEEN";
 	final static String KING = "KING";	
 
-	private enum Color {BLACK, WHITE};
+	private enum Color {BLACK, WHITE, NO_COLOR};
 	enum Type {PAWN, ROOK, KNIGHT, BISHOP, KING, QUEEN, NO_PIECE}
 	Color color;
 	Type type;
@@ -21,14 +21,15 @@ public class Piece {
 	public static char QUEEN_REPRESENTATION = 'q';
 	public static char KING_REPRESENTATION = 'k';
 	char characterRepresentation;
+	double strength;
 	
 	public Piece(String color, char characterRepresentation){
-		if (color.toUpperCase() == WHITE)
+		if (color.toUpperCase().equals(WHITE))
 			this.color = Color.WHITE;
-		else if (color.toUpperCase() == BLACK)
+		else if (color.toUpperCase().equals(BLACK))
 			this.color = Color.BLACK;
 		else
-			this.color = null;
+			this.color = Color.NO_COLOR;
 		this.characterRepresentation = characterRepresentation;
 	}
 	
@@ -37,12 +38,20 @@ public class Piece {
 		this.type = type;
 	}
 	
+	public void setStrength(double strength){
+		this.strength = strength;
+	}
+	
+	public double getStrength(){
+		return strength;
+	}
+	
 	void setColor(Color color){
 		this.color = color;
 	}
 	
-	public Color getColor(){
-		return color;
+	public String getColor(){
+		return color.toString();
 	}
 	
 	public void setCharacterRepresentation(char characterRepresentation){
@@ -106,13 +115,14 @@ public class Piece {
 			piece.setBlackCharacterRepresentation();
 		}
 		else {
+			piece.setColor(Color.NO_COLOR);
 			piece.setCharacterRepresentation('.');
 		}
 		return piece;
 	}
 
 	public static Piece noPiece(){
-		Piece noPiece = new Piece(null, Type.NO_PIECE);
+		Piece noPiece = new Piece(Color.NO_COLOR, Type.NO_PIECE);
 		noPiece.setCharacterRepresentation('.');
 		return noPiece;
 	}
