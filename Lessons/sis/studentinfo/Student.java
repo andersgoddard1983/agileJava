@@ -7,9 +7,9 @@ public class Student {
 	private String name;
 	private int credits;
 	private String state = "";
-	enum Grade {A, B, C, D, F};
+	public enum Grade {A, B, C, D, F};
 	private ArrayList<Grade> grades = new ArrayList<Grade>();
-	private GradingStrategy gradingStrategy = new RegularGradingStrategy();
+	private GradingStrategy gradingStrategy = new BasicGradingStrategy();
 	static final int CREDITS_REQUIRED_FOR_FULL_TIME = 12;
 	static final String IN_STATE = "CO";
 	
