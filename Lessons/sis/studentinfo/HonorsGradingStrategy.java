@@ -7,6 +7,5 @@ public class HonorsGradingStrategy extends BasicGradingStrategy {
 		if (points > 0)
 			points += 1;
 		return points;
-	}
-	
+	}	
 }
